@@ -13,6 +13,7 @@ public class Program
             Console.WriteLine("------");
             Console.WriteLine("Press 0 to exit program");
             Console.WriteLine("Press 1 to get movie ticket price");
+            Console.WriteLine("Press 3 to enter the timeloop");
             Console.WriteLine("Enter input:");
             string enteredInput = Console.ReadLine();
             int input = 0;
@@ -26,6 +27,10 @@ public class Program
                 case 1:
                     Console.WriteLine("Entering movie price realm.");
                     MovieGoers();
+                    break;
+                case 3:
+                    Console.WriteLine("Entering the timeloop.");
+                    Timeloop();
                     break;
                 default:
                     Console.WriteLine("Invalid Input");
@@ -74,5 +79,17 @@ public class Program
             Console.WriteLine("Movie price for adults is : " + adultPrice + "kr");
             return adultPrice;
         }
+    }
+
+    public static void Timeloop()
+    {
+        Console.WriteLine("Enter a word to timeloop:");
+        string enteredInput = Console.ReadLine();
+
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write(i + ". " + enteredInput + " ");
+        }
+        Console.WriteLine("Exited the timeloop:");
     }
 }
