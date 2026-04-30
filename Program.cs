@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Program
 {
@@ -17,9 +18,15 @@ public class Program
             Console.WriteLine("Press 3 to enter the timeloop");
             Console.WriteLine("Press 4 to split the string (of fate)");
             Console.WriteLine("Enter input:");
+
             string enteredInput = Console.ReadLine();
             int input = 0;
-            int.TryParse(enteredInput, out input);
+            bool valid = int.TryParse(enteredInput, out input);
+
+            if (!valid)
+            {
+                input = 9;
+            }
             switch (input)
             {
                 case 0:
@@ -54,13 +61,19 @@ public class Program
         Console.WriteLine("Enter amount of moviegoers:");
         string enteredInput = Console.ReadLine();
         int moviegoers = 0;
-        int.TryParse(enteredInput, out moviegoers);
-        int totalTickerCost = 0;
+        bool valid = int.TryParse(enteredInput, out moviegoers);
+        if (!valid)
+        {
+            Console.WriteLine("Invalid amount. Try again later");
+            return;
+        }
+
+        int totalTicketCost = 0;
         for (int i = 0; i < moviegoers; i++)
         {
-            totalTickerCost += MoviePrice();
+            totalTicketCost += MoviePrice();
         }
-        Console.WriteLine(moviegoers + " moviegoers. \nTotal cost is " +  totalTickerCost + "kr");
+        Console.WriteLine(moviegoers + " moviegoers. \nTotal cost is " +  totalTicketCost + "kr");
     }
 
     public static int MoviePrice()
@@ -73,7 +86,13 @@ public class Program
         Console.WriteLine("Enter age:");
         string enteredInput = Console.ReadLine();
         int input = 0;
-        int.TryParse(enteredInput, out input);
+        bool valid = int.TryParse(enteredInput, out input);
+
+        if (!valid)
+        {
+            Console.WriteLine("Invalid input. Getting standard price");
+            return adultPrice;
+        }
 
         if (input < 20)
         {
@@ -111,15 +130,21 @@ public class Program
         {
             Console.Write(i + ". " + enteredInput + " ");
         }
-        Console.WriteLine("Exited the timeloop:");
+        Console.WriteLine("\nExited the timeloop:");
     }
 
     public static void SplitString()
     {
         Console.WriteLine("Write a sentance with a least three words:");
         string enteredInput = Console.ReadLine();
-
-        var splitString = enteredInput.Split(" ");
+        char space = ' ';
+        int spaces = enteredInput.Count(letter => letter == space);
+        if (spaces < 2)
+        {
+            Console.WriteLine("Insufficient spaces!");
+            return;
+        }
+        var splitString = enteredInput.Split(space);
 
         string thirdWord = splitString[2];
         Console.WriteLine("The third word is: " + thirdWord);
